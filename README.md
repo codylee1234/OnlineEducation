@@ -5,3 +5,13 @@ many practical problems related to education in modern society. It provide flexi
 convenient and sustainable learning experience through digital means
 
 
+# Aim
+
+The research on online education systems involves how to efficiently and flexibly transfer
+knowledge on digital platforms, with specific computer science issues focused on large-scale
+user interaction and personalized learning recommendations. As the number of users
+increases, the system requires efficient data management and real-time response
+capabilities to ensure that users can seamlessly access content such as videos, documents,
+and interact with teachers or other students. In addition, the system faces the challenge of
+personalized recommendation, improving learning effectiveness by analyzing users' learning
+habits and progress.
