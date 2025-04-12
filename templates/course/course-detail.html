@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+Class detail
+{% endblock title %}
+
+{% block custom_bread %}
+
+<section>
+	<div class="wp">
+		<div class="crumbs">
+			<ul>
+				<li><a href="{% url 'index' %}">Index</a>></li>
+                <li><a href="{% url 'course:course_list' %}">OpenClass</a>></li>
+				<li>Detail</li>
+			</ul>
+		</div>
+	</div>
+</section>
+
+{% endblock custom_bread %}
+
+{% block custom_content %}
+
+<section>
+	<div class="wp">
+		<div class="groupPurchase_detail detail">
+			<div class="toppro">
+				<div class="left">
+					<div class="picbox">
+						<div class="tb-booth tb-pic">
+							<img width="440" height="445" src="{{ MEDIA_URL }}{{ course.image }}" class="jqzoom" />
+						</div>
+
+					</div>
+					<div class="des">
+						<h1 title="{{ course.name }}">{{ course.name }}</h1>
+						<span class="key">{{ course.detail }}</span>
+						<div class="prize">
+							<span class="fl">difficulty：<i class="key">{{ course.get_degree_display }}</i></span>
+							<span class="fr">Learners number：{{ course.students }}</span>
+						</div>
+						<ul class="parameter">
+							<li><span class="pram word3">Learn&nbsp;times：</span><span>{{ course.learn_times }}</span></li>
+                            <li><span class="pram word3">Chapter:</span><span>{{ course.get_zj_nums }}</span></li>
+                            <li><span class="pram word3">Course class：</span><span title="">{{ course.category }}</span></li>
+							<li class="piclist"><span class="pram word4">Course chat：</span>
+								<a href="http://20.189.123.230:9000?name={{ user.username }}&room={{ course.name }}" target="_blank"><font style="color: #1094fa; font-weight: bold;">Enter</font></a>
+							</li>
+						</ul>
+						<div class="btns">
+							<div class="btn colectgroupbtn"  id="jsLeftBtn">
+                                {% if has_fav_course %}
+																	Collected
+                                {% else %}
+																	Collect
+                                {% endif %}
+                            </div>
+                                <div class="buy btn"><a style="color: white" href="{% url 'course:course_info' course.id %}">Start learn</a></div>
+						</div>
+					</div>
+                    <div class="group-share-box">
+                        <div class="bdsharebuttonbox"
+                             data-text="django开始了"
+                             data-desc="我在#慕课网#发现了"
+                             data-comment=""
+                             data-url="/group/groupdetail/15/">
+                            <span class="fl"></span>
+                            <a href="#" class="bds_more" data-cmd="more"></a>
+                            <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
+                            <a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
+                            <a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
+                            <a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a>
+                            <a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
+                        </div>
+                    </div>
+				</div>
+				<div class="right">
+					<div class="head">
+						<h1>Course Organization</h1>
+						<p>Famous Schools</p>
+					</div>
+					<div class="pic">
+                        <a href="{% url 'org:org_home' course.course_org.id %}">
+                            <img width="150" height="80" src="{{ MEDIA_URL }}{{ course.course_org.image }}"/>
+                        </a>
+                    </div>
+					<a href="{% url 'org:org_home' course.course_org.id %}">
+                        <h2 class="center" title="{{ course.course_org.name }}">{{ course.course_org.name }}</h2>
+                    </a>
+					<div class="btn  notlogin" data-favid="14" id="jsRightBtn">
+                        {% if has_fav_org %}
+                           collected
+                        {% else %}
+						               collect
+                        {% endif %}
+                    </div>
+					<div class="clear">
+						<ul>
+                            <li>
+                                <span>Course number:{{ course.course_org.course_nums }}</span>
+                            </li>
+                            <li>
+                                <span>Teacher number:{{ course.course_org.get_teacher_nums }}</span>
+                            </li>
+							<li>Location：&nbsp;&nbsp;{{ course.course_org.address }}</li>
+							<li>Cert:
+                                &nbsp;&nbsp;
+								    <img title="Golden Org" src="{% static 'images/gold.png' %}"/>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section>
+	<div class="wp">
+		<div class="list groupPurchase_detail_pro">
+			<div class="left layout">
+				<div class="head">
+					<ul class="tab_header">
+						<li class="active">Detail</li>
+					</ul>
+				</div>
+				<div class="tab_cont tab_cont1">
+{#                关闭django模板中的自动转义#}
+                    {% autoescape off %}
+					<p>&nbsp; &nbsp; {{ course.detail }}</p>
+                    {% endautoescape %}
+				</div>
+				<div class="tab_cont tab_cont2" >
+					<div class="comment">
+						<div class="comenlist">
+
+	                    </div>
+					</div>
+				</div>
+			</div>
+			<div class="right layout">
+				<div class="head">Related courses</div>
+                <div class="group_recommend">
+                    {% for relate_course in relate_courses %}
+                        <dl>
+                            <dt>
+                                <a target="_blank" href="{% url 'course:course_detail' relate_course.id %}">
+                                    <img width="240" height="100" class="scrollLoading" src="{{ MEDIA_URL }}{{ relate_course.image }}"/>
+                                </a>
+                            </dt>
+                            <dd>
+                                <a target="_blank" href="{% url 'course:course_detail' relate_course.id %}"><h2>{{ relate_course.name }}</h2></a>
+                                <span class="fl">Duration：<i class="key">{{ relate_course.learn_times }}</i></span>
+                            </dd>
+                        </dl>
+                    {% endfor %}
+
+                </div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock custom_content %}
+
+{% block custom_js %}
+
+<script type="text/javascript">
+//收藏分享
+    function add_fav(current_elem, fav_id, fav_type){
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url:"{% url "org:add_fav" %}",
+            data:{'fav_id':fav_id, 'fav_type':fav_type},
+            async: true,
+            beforeSend:function(xhr, settings){
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            },
+            success: function(data) {
+                if(data.status === 'fail'){
+                    if(data.msg === '用户未登录'){
+                        window.location.href="{% url 'login' %}";
+                    }else{
+                        alert(data.msg)
+                    }
+
+                }else if(data.status === 'success'){
+                    current_elem.text(data.msg)
+                }
+            }
+        })
+    }
+
+    $('#jsLeftBtn').click(function(){
+        add_fav($(this), {{ course.id }}, 1);
+    });
+
+    $('#jsRightBtn').click(function(){
+        add_fav($(this), {{ course.course_org.id }}, 2);
+    });
+
+</script>
+{% endblock custom_js %}
