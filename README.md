@@ -15,3 +15,16 @@ capabilities to ensure that users can seamlessly access content such as videos, 
 and interact with teachers or other students. In addition, the system faces the challenge of
 personalized recommendation, improving learning effectiveness by analyzing users' learning
 habits and progress.
+
+
+# User info
+
+login url:   http://20.189.123.230:8000/login/
+
+
+users:
+tommy@tommy.com/tommy12345
+jacky@jacky.com/jacky12345
+
+
+
