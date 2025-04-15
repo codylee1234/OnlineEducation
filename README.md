@@ -24,9 +24,12 @@ login url:   http://20.189.123.230:8000/login/
 
 users:
 
-user:  tommy@tommy.com         password: tommy12345
+user:  tommy@tommy.com
+password: tommy12345
 
-user:  jacky@jacky.com         password: jacky12345      
+
+user:  jacky@jacky.com
+password: jacky12345      
 
 
 
