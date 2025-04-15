@@ -24,11 +24,11 @@ class UserProfile(AbstractUser):
     nick_name_default = get_user_name()
     '''
 
-    nick_name = models.CharField(max_length=50, verbose_name=u"昵称", default='')
-    birthday = models.DateField(verbose_name=u"生日", null=True, blank=True)  # 默认为空，表单验证时也可以为空
-    gender = models.CharField(verbose_name="性别", max_length=6, choices=(("male", u"男"), ("female", u"女")), default="male")
-    address = models.CharField(verbose_name="住址", max_length=100, default=u"", null=True, blank=True)
-    mobile = models.CharField(verbose_name="联系方式", max_length=11, null=True, blank=True)
+    nick_name = models.CharField(max_length=50, verbose_name=u"nick name", default='')
+    birthday = models.DateField(verbose_name=u"birthday", null=True, blank=True)  # 默认为空，表单验证时也可以为空
+    gender = models.CharField(verbose_name="gender", max_length=6, choices=(("male", u"male"), ("female", u"female")), default="male")
+    address = models.CharField(verbose_name="location", max_length=100, default=u"", null=True, blank=True)
+    mobile = models.CharField(verbose_name="contact", max_length=11, null=True, blank=True)
     tags = models.CharField(verbose_name="tags", max_length=10000, null=True, blank=True)
     '''
     如果你的  MEDIA_ROOT  设定为  '/home/media'  ，并且  upload_to  设定
@@ -63,10 +63,10 @@ class EmailVerifyRecord(models.Model):
         ("forget", u"找回密码"),
         ("update_email", "修改邮箱")
     )
-    code = models.CharField(max_length=50, verbose_name=u"验证码")
-    email = models.EmailField(max_length=50, verbose_name=u"邮箱")
-    send_type = models.CharField(choices=SEND_CHOICES, max_length=20, verbose_name="发送类型")
-    send_time = models.DateTimeField(default=datetime.now, verbose_name="发送时间")
+    code = models.CharField(max_length=50, verbose_name=u"code")
+    email = models.EmailField(max_length=50, verbose_name=u"email")
+    send_type = models.CharField(choices=SEND_CHOICES, max_length=20, verbose_name="send type")
+    send_time = models.DateTimeField(default=datetime.now, verbose_name="send time")
     # 将now()中的括号去掉保证默认时间是models实例化的时间，而不是编译时间
 
     class Meta:

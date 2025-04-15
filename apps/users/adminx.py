@@ -12,8 +12,8 @@ class BaseSetting(object):
 
 
 class GlobalSettings(object):
-    site_title = "online_edu adminx"  # 左上角
-    site_footer = "welcome to online_edu"  # 底部
+    site_title = "Online Edu Adminx"  # 左上角
+    site_footer = "welcome to Online Edu"  # 底部
     menu_style = "accordion"  # 管理左侧菜单
 
 
