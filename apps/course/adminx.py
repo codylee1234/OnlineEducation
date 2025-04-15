@@ -109,7 +109,7 @@ class CourseResourceAdmin(object):
     list_filter = ['course', 'name', 'download', 'add_time']
 
 
-# 将adminx器与models进行关联注册。
+# 将后台管理器与models进行关联注册。
 xadmin.site.register(Course, CourseAdmin)
 xadmin.site.register(BannerCourse, BannerCourseAdmin)
 xadmin.site.register(Lesson, LessonAdmin)

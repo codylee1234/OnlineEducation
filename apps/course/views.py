@@ -119,26 +119,32 @@ class CourseRecommendView(View):
     def get(self, request):
         print('request.user -->>>', request.user, ', user id -->>>', request.user.id)
 
-        # get recommend courses id
-        users = [
-            {'id': request.user.id, 'username': request.user.username, 'tags': request.user.tags}
-        ]
-        print('users -->>>', users)
-
-        # course_ids = [6, 2, 4, 5, 1]
-        if users[0].get('tags') is None:
+        # no login user
+        # if request.user == 'AnonymousUser':
+        if request.user.id is None:
             all_courses = Course.objects.all().order_by('-add_time')
+
         else:
-            courses = list()
-            all_courses = Course.objects.all().order_by('-add_time')
-            print('all_courses -->>>', all_courses)
-            for c in all_courses:
-                c_item = {'id': c.id, 'title': c.name, 'tags': c.tag}
-                courses.append(c_item)
-            print('courses -->>>', courses)
+            # get recommend courses id
+            users = [
+                {'id': request.user.id, 'username': request.user.username, 'tags': request.user.tags}
+            ]
+            print('users -->>>', users)
 
-            course_ids = get_recommend_courseids(users, courses)
-            all_courses = Course.objects.filter(id__in=course_ids)
+            # course_ids = [6, 2, 4, 5, 1]
+            if users[0].get('tags') is None:
+                all_courses = Course.objects.all().order_by('-add_time')
+            else:
+                courses = list()
+                all_courses = Course.objects.all().order_by('-add_time')
+                print('all_courses -->>>', all_courses)
+                for c in all_courses:
+                    c_item = {'id': c.id, 'title': c.name, 'tags': c.tag}
+                    courses.append(c_item)
+                print('courses -->>>', courses)
+
+                course_ids = get_recommend_courseids(users, courses)
+                all_courses = Course.objects.filter(id__in=course_ids)
 
         # -------------------------------------------------------------
         # all_courses = Course.objects.all().order_by('-add_time')

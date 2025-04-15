@@ -16,25 +16,25 @@ class Course(models.Model):
         ('zj', 'Middle'),
         ('gj', 'Senior'),
     )
-    course_org = models.ForeignKey(CourseOrg, verbose_name="课程机构", on_delete=models.CASCADE, null=True, blank=True)
-    teacher = models.ForeignKey(Teacher, verbose_name="课程讲师", on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=50, verbose_name=u"课程名")
-    desc = models.CharField(max_length=300, verbose_name=u"课程描述")
-    detail = models.TextField(verbose_name=u"课程详情")
+    course_org = models.ForeignKey(CourseOrg, verbose_name="Organization", on_delete=models.CASCADE, null=True, blank=True)
+    teacher = models.ForeignKey(Teacher, verbose_name="Teacher", on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=50, verbose_name=u"Course name")
+    desc = models.CharField(max_length=300, verbose_name=u"Description")
+    detail = models.TextField(verbose_name=u"Detail")
     # detail = UEditorField(verbose_name='内容	', width=600, height=300, toolbars="full", imagePath="course/image/", filePath="course/image/", upload_settings={"imageMaxSize":1204000},
     #          settings={}, command=None, blank=True)
-    degree = models.CharField(verbose_name=u"难度", choices=DEGREE_CHOICE, max_length=100)
+    degree = models.CharField(verbose_name=u"Difficulty", choices=DEGREE_CHOICE, max_length=100)
     learn_times = models.IntegerField(default=0, verbose_name=u"Time cost(min)")
     students = models.IntegerField(default=0, verbose_name=u"Learner")
     fav_nums = models.IntegerField(default=0, verbose_name=u"Collected")
-    image = models.ImageField(upload_to="course/%Y/%m", verbose_name=u"封面图", max_length=100, blank=True)
-    click_nums = models.IntegerField(default=0, verbose_name=u"点击数")
-    category = models.CharField(max_length=30, default="课程类别", verbose_name="课程类别")
+    image = models.ImageField(upload_to="course/%Y/%m", verbose_name=u"Cover Image", max_length=100, blank=True)
+    click_nums = models.IntegerField(default=0, verbose_name=u"Clicks")
+    category = models.CharField(max_length=30, default="Type", verbose_name="Type")
     tag = models.CharField(max_length=300, default="", verbose_name="tags")
-    need_know = models.CharField(max_length=300, default="", verbose_name="课程须知")
-    teacher_tell = models.CharField(max_length=300, default="", verbose_name="老师告诉你")
-    is_banner = models.BooleanField('是否轮播', default=False)
-    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
+    need_know = models.CharField(max_length=300, default="", verbose_name="Course Notice")
+    teacher_tell = models.CharField(max_length=300, default="", verbose_name="Teacher tell you")
+    is_banner = models.BooleanField('Rotating broadcast', default=False)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"Add time")
 
     class Meta:
         # verbose_name = u"课程"
@@ -45,12 +45,12 @@ class Course(models.Model):
         # 获取章节数
         return self.lesson_set.all().count()
     # xadmin后台课程列表页显示章节数函数的名称
-    get_zj_nums.short_description = "章节数"
+    get_zj_nums.short_description = "Chapters"
 
     def go_to(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<a href="http://www.baidu.com">跳转</a>')
-    go_to.short_description = "跳转"
+        return mark_safe('<a href="http://www.baidu.com">Link</a>')
+    go_to.short_description = "Link"
 
     def get_learn_users(self):
         # 获取当前课程5个的学习用户
@@ -77,9 +77,9 @@ class BannerCourse(Course):
 class Lesson(models.Model):
     """课程章节"""
 
-    course = models.ForeignKey(Course, verbose_name=u"课程", on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, verbose_name=u"章节名")
-    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
+    course = models.ForeignKey(Course, verbose_name=u"course", on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, verbose_name=u"chapter name")
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"add time")
 
     class Meta:
         # verbose_name = u"章节"
@@ -91,17 +91,17 @@ class Lesson(models.Model):
         return self.video_set.all()
 
     def __str__(self):
-        return '《{0}》课程的章节 >> {1}'.format(self.course, self.name)
+        return '《{0}》Chapters >> {1}'.format(self.course, self.name)
 
 
 class Video(models.Model):
     """章节学习视频"""
 
-    lesson = models.ForeignKey(Lesson, verbose_name=u"章节", on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, verbose_name=u"视频名")
-    learn_times = models.IntegerField(verbose_name="学习时长(分钟)", default=20)
-    url = models.CharField(verbose_name="章节视频", default="", max_length=100)
-    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
+    lesson = models.ForeignKey(Lesson, verbose_name=u"chapter", on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, verbose_name=u"video name")
+    learn_times = models.IntegerField(verbose_name="duration(mins)", default=20)
+    url = models.CharField(verbose_name="chapter video", default="", max_length=100)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"add time")
 
     class Meta:
         # verbose_name = u"视频"
@@ -115,10 +115,10 @@ class Video(models.Model):
 class CourseResource(models.Model):
     """课程学习资源"""
 
-    course = models.ForeignKey(Course, verbose_name=u"章节", on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, verbose_name=u"名称")
-    download = models.FileField(upload_to="course/resource/%Y/%m", verbose_name=u"资源文件", max_length=100)
-    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
+    course = models.ForeignKey(Course, verbose_name=u"chapter", on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, verbose_name=u"name")
+    download = models.FileField(upload_to="course/resource/%Y/%m", verbose_name=u"resouce file", max_length=100)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"add time")
 
     class Meta:
         # verbose_name = u"课程资源"

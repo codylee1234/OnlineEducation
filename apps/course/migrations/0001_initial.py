@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
             name='Lesson',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='章节名')),
+                ('name', models.CharField(max_length=100, verbose_name='chapter name')),
                 ('add_time', models.DateTimeField(default=datetime.datetime.now, verbose_name='添加时间')),
                 ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='course.Course', verbose_name='课程')),
             ],
