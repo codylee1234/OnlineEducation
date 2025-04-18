@@ -19,19 +19,40 @@ habits and progress.
 
 # User info
 
-login url:   http://20.189.123.230:8000/login/
-
-
+```shell 
 users:
+==============
 
 user:  tommy@tommy.com
-
 password: tommy12345
-
-
+--------------------------
 user:  jacky@jacky.com
-
 password: jacky12345      
+
+```
+
+# Links
+
+home page:  http://20.189.123.230:8000
+
+user Login:  http://20.189.123.230:8000/login/
+
+user sgin up:  http://20.189.123.230:8000/register/ 
+
+open class:  http://20.189.123.230:8000/course/list/
+
+recommend class:  http://20.189.123.230:8000/course/recommend/
+
+teachers info:  http://20.189.123.230:8000/org/teacher/list/
+
+organization info:  http://20.189.123.230:8000/org/list/
+
+user center:  http://20.189.123.230:8000/users/info/
+
+linux online course:  http://20.189.123.230:8000/course/detail/1/
+
+linux course online chat room:  http://20.189.123.230:9000/?name=cody&room=Linux
+
 
 
 
