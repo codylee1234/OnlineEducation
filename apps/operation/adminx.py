@@ -44,7 +44,7 @@ class UserMessageAdmin(object):
     list_filter = ['user', 'message', 'has_read', 'add_time']
 
 
-# 将adminx器与models进行关联注册。
+# 将后台管理器与models进行关联注册。
 xadmin.site.register(UserAsk, UserAskAdmin)
 xadmin.site.register(UserFavorite, UserFavoriteAdmin)
 xadmin.site.register(UserCourse, UserCourseAdmin)

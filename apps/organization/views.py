@@ -93,7 +93,7 @@ class UserAskView(View):
 
 class OrgHomeView(View):
     """
-    课程机构Index
+    课程机构首页
     """
     def get(self, request, org_id):
         current_page = "home"

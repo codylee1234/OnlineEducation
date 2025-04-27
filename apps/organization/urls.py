@@ -16,7 +16,7 @@ urlpatterns = [
     # 用户咨询表单
     url(r'^add_ask/$', UserAskView.as_view(), name="add_ask"),
 
-    # 机构Index
+    # 机构首页
     url(r'home/(?P<org_id>\d+)/', OrgHomeView.as_view(), name="org_home"),
 
     # 课程机构列表
