@@ -97,7 +97,7 @@ class RegisterView(View):
         if register_form.is_valid():
             user_name = request.POST.get('email', '')
             if UserProfile.objects.filter(username=user_name):
-                return render(request, "register.html", {"msg": "用户已经存在", "register_form": register_form})
+                return render(request, "register.html", {"msg": "user already exists", "register_form": register_form})
             pass_word = request.POST.get('password', '')
             pass_word_story = make_password(pass_word)
             user_profile = UserProfile()
