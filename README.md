@@ -54,5 +54,19 @@ linux online course:  http://20.189.123.230:8000/course/detail/1/
 linux course online chat room:  http://20.189.123.230:9000/?name=cody&room=Linux
 
 
+** admin management links **
+
+admin management login:   http://20.189.123.230:8000/xadmin/
+
+application log:  http://20.189.123.230:8000/xadmin/xadmin/log/
+
+Authentication and Authorization:  http://20.189.123.230:8000/xadmin/auth/group/
+
+courses management:  http://20.189.123.230:8000/xadmin/course/course/
+
+Users management:  http://20.189.123.230:8000/xadmin/course/course/
+
+
+
 
 
